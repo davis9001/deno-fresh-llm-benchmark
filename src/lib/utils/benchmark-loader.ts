@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+// Import the benchmark results directly as a static JSON module
+import benchmarkResults from '../../../benchmarks/benchmark-results-latest.json';
 
 export interface BenchmarkResult {
 	provider: string;
@@ -21,9 +21,7 @@ export interface AggregatedResults {
 
 export async function loadBenchmarkResults(): Promise<BenchmarkResult[]> {
 	try {
-		const resultsPath = path.join(process.cwd(), 'benchmarks', 'benchmark-results-latest.json');
-		const data = await fs.promises.readFile(resultsPath, 'utf-8');
-		return JSON.parse(data);
+		return benchmarkResults as BenchmarkResult[];
 	} catch (error) {
 		console.error('Error loading benchmark results:', error);
 		return [];

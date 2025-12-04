@@ -16,6 +16,7 @@
 		if (action === 'login') goto('/auth/login');
 		else if (action === 'signup') goto('/auth/signup');
 		else if (action === 'chat') goto('/chat');
+		else if (action === 'benchmarks') goto('/benchmarks');
 	}
 
 	function handleSearchFocus() {
@@ -444,6 +445,19 @@
 					/>
 				</div>
 
+				<button
+					class="command-option"
+					class:focused={focusedOption === 0}
+					on:click={() => handleAction("benchmarks")}
+					on:mouseenter={() => (focusedOption = 0)}
+					on:mouseleave={() => (focusedOption = -1)}
+				>
+					<svg class="option-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<path d="M3 4h14a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1zm1 2v8h12V6H4zm2 1h8v1H6V7zm0 2h8v1H6V9zm0 2h5v1H6v-1z" />
+					</svg>
+					<span>View Benchmarks 🧪</span>
+				</button>
+				
 				<div class="command-options">
 					<button
 						class="command-option"
