@@ -1,222 +1,110 @@
-![alt text](image.png)
+# Deno Fresh LLM Benchmark
 
-# ✨ NebulaKit
+> Evaluating how well different AI models can generate Deno Fresh components
 
-> A cosmic-grade SvelteKit starter template powered by Cloudflare's full stack
+## 📊 About
 
-[![Built with SvelteKit](https://img.shields.io/badge/Built%20with-SvelteKit-FF3E00?style=flat&logo=svelte)](https://kit.svelte.dev/)
-[![Powered by Cloudflare](https://img.shields.io/badge/Powered%20by-Cloudflare-F38020?style=flat&logo=cloudflare)](https://www.cloudflare.com/)
+This project benchmarks Large Language Models (LLMs) on their ability to generate functional Deno Fresh components from natural language descriptions. It's inspired by [svelte-bench](https://github.com/khromov/svelte-bench) but adapted for the Deno Fresh framework.
 
-NebulaKit is a production-ready SvelteKit template with everything you need to build modern web applications. It comes with Cloudflare Workers integration (D1, KV, R2, Queues, Turnstile), a complete theme system, command palette, LLM chat UI, full authentication, and polished drag-and-drop—all built in from day one.
+## 🚀 Features
 
-## 🌟 Features
+- **Automated Benchmarking**: Tests multiple LLM providers (OpenAI, Anthropic, etc.)
+- **Deno Fresh Components**: Evaluates component generation for Deno Fresh/Preact
+- **Daily Updates**: Automated benchmarks run daily via GitHub Actions
+- **Results Dashboard**: View benchmark results at `/benchmarks`
+- **HumanEval Metrics**: Uses pass@k methodology from OpenAI's paper
 
-- **🚀 Cloudflare Full Stack**: D1 database, KV storage, R2 buckets, Queues, and Turnstile built-in
-- **🎨 Theme System**: Light/dark modes with extensible CSS variables
-- **⌨️ Command Palette**: Keyboard-first navigation (Cmd/Ctrl + K)
-- **💬 LLM Chat UI**: Ready-to-use chat interface for AI integration
-- **🔐 Full Authentication**: Email/password + SSO (Google, GitHub) with account linking
-- **📱 Mobile-First**: Responsive layouts optimized for all devices
-- **🎯 Drag & Drop**: Polished DnD with cross-column and mobile support
-- **⚡ TypeScript**: Full type safety with Cloudflare Workers types
-- **🎨 UI Components**: Beautiful, accessible components out of the box
+## 🧪 Test Cases
 
-## 🚀 Quick Start
+The benchmark includes several test cases that evaluate different aspects of Deno Fresh development:
+
+- **hello-world**: Basic component rendering and styling
+- **counter**: Interactive state management with Preact hooks
+- **props**: Component props and TypeScript interfaces  
+
+## 🛠️ Setup
+
+### Prerequisites
+
+- Node.js 20 or later
+- LLM API keys (OpenAI, Anthropic, etc.)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/davis9001/deno-fresh-llm-benchmark.git
+cd deno-fresh-llm-benchmark
+
 # Install dependencies
 npm install
 
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Deploy to Cloudflare Pages
-npm run deploy
+# Copy environment variables
+cp .env.example .env
+# Edit .env and add your API keys
 ```
 
-Visit `http://localhost:5173` to see your app!
-
-## 🧪 Testing (TDD Required!)
-
-NebulaKit follows **Test-Driven Development** with 90%+ code coverage requirements:
+### Running Benchmarks
 
 ```bash
-# Run all tests
-npm run test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Check coverage (must be ≥90%)
-npm run test:coverage
-
-# Run E2E tests
-npm run test:e2e
-
-# Run all tests (unit + E2E)
-npm run test:all
+# Run a single benchmark
+npm run benchmark
 ```
 
-**Important**: All features and bug fixes require tests written FIRST. See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
+### Viewing Results
 
-## 📚 Documentation
+```bash
+# Start the development server
+npm run dev
 
-- [Setup Guide](./SETUP.md) - Complete installation and configuration instructions
-- [Features](./FEATURES.md) - Detailed feature documentation and usage examples
-- [Contributing Guide](./CONTRIBUTING.md) - Development workflow and testing standards
-- [Theme System Guide](./docs/THEME_SYSTEM.md) - Comprehensive theming and accessibility guide
-- [GitHub Copilot Instructions](.github/copilot-instructions.md) - AI-assisted development guidelines
+# Visit http://localhost:4277/benchmarks
+```
+
+## 📈 Results
+
+Benchmark results are automatically generated and stored in the `benchmarks/` directory. The dashboard displays:
+
+- Overall performance metrics
+- Results by provider
+- Results by model
+- Results by test case
+
+## 🤖 Supported Providers
+
+- **OpenAI**: GPT-4o, GPT-4o-mini, GPT-4-turbo
+- **Anthropic**: Claude 3.5 Sonnet, Claude 3.5 Haiku
+
+## ⚙️ GitHub Actions
+
+The repository includes a GitHub Actions workflow that:
+
+1. Runs benchmarks daily at 2 AM UTC
+2. Commits results automatically
+3. Can be triggered manually via workflow_dispatch
+
+To set up automated benchmarks, add your API keys as GitHub secrets.
 
 ## 🏗️ Project Structure
 
 ```
-NebulaKit/
-├── src/
-│   ├── lib/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── stores/         # Svelte stores (theme, etc.)
-│   │   ├── server/         # Server-side utilities
-│   │   └── utils/          # Helper functions
-│   ├── routes/             # SvelteKit routes
-│   │   ├── auth/          # Authentication pages
-│   │   ├── chat/          # LLM chat interface
-│   │   └── demo/          # Feature demonstrations
-│   ├── app.css            # Global styles & theme
-│   └── app.html           # HTML template
-├── static/                 # Static assets
-└── wrangler.toml          # Cloudflare configuration
+├── benchmark-src/          # Benchmark infrastructure
+│   ├── tests/             # Test definitions
+│   ├── llms/              # LLM provider integrations
+│   └── utils/             # Test runner utilities
+├── benchmarks/            # Benchmark results (JSON)
+├── src/routes/benchmarks/ # Results dashboard
+└── .github/workflows/     # GitHub Actions
 ```
 
-## 🎨 Theming
+## 📄 License
 
-NebulaKit includes a comprehensive theme system with:
+MIT License
 
-- ✅ **WCAG AA compliant** colors (4.5:1 contrast minimum)
-- 🌓 Light and dark modes with automatic system detection
-- 🎨 CSS custom properties for all design tokens
-- ♿ Accessibility-first design approach
-- 🧪 Automated contrast validation
+## 🙏 Acknowledgments
 
-```css
-/* All colors use CSS variables - never hardcode! */
-.button {
-	background-color: var(--color-primary);
-	color: var(--color-background);
-	border-radius: var(--radius-md);
-	padding: var(--spacing-sm) var(--spacing-md);
-}
-```
+- Inspired by [svelte-bench](https://github.com/khromov/svelte-bench)
+- Built with SvelteKit and Cloudflare
 
-**Validate theme contrast:**
+---
 
-```bash
-npm run validate:contrast
-```
-
-See the [Theme System Guide](./docs/THEME_SYSTEM.md) for complete documentation.
-
-## 🔐 Authentication
-
-Built-in auth pages with support for:
-
-- Email/password authentication
-- OAuth providers (Google, GitHub)
-- Session management
-- Account linking
-
-Easily extend with [@auth/sveltekit](https://authjs.dev/) for more providers.
-
-## 💬 Chat UI
-
-The included chat interface is ready to connect to your LLM API:
-
-```typescript
-// In /routes/chat/+page.svelte
-async function sendMessage() {
-	const response = await fetch('/api/chat', {
-		method: 'POST',
-		body: JSON.stringify({ message: input })
-	});
-	// Handle response
-}
-```
-
-## ☁️ Cloudflare Integration
-
-### D1 Database
-
-```typescript
-const result = await platform.env.DB.prepare('SELECT * FROM users WHERE email = ?')
-	.bind(email)
-	.first();
-```
-
-### KV Storage
-
-```typescript
-await platform.env.KV.put('key', 'value');
-const value = await platform.env.KV.get('key');
-```
-
-### R2 Storage
-
-```typescript
-await platform.env.BUCKET.put('file.jpg', fileData);
-const file = await platform.env.BUCKET.get('file.jpg');
-```
-
-### Queues
-
-```typescript
-await platform.env.QUEUE.send({ data: 'message' });
-```
-
-## 🎯 Drag & Drop
-
-The demo page includes a fully functional kanban board with:
-
-- Desktop drag and drop
-- Mobile touch support
-- Cross-column dragging
-- Smooth animations
-
-## 📱 Mobile Support
-
-NebulaKit is mobile-first with:
-
-- Responsive breakpoints (640px, 768px, 1024px, 1280px)
-- Touch-optimized interactions
-- Mobile navigation menu
-- Optimized bundle sizes
-
-## 🛠️ Tech Stack
-
-- [SvelteKit](https://kit.svelte.dev/) - Web framework
-- [Cloudflare Workers](https://workers.cloudflare.com/) - Edge runtime
-- [TypeScript](https://www.typescriptlang.org/) - Type safety
-- [Vite](https://vitejs.dev/) - Build tool
-
-## 📝 License
-
-MIT License - feel free to use this template for any project!
-
-## 🤝 Contributing
-
-We welcome contributions! Please read our [Contributing Guide](./CONTRIBUTING.md) first.
-
-**Key requirements:**
-
-- ✅ Test-Driven Development (TDD) - write tests first
-- ✅ 90%+ code coverage on all changes
-- ✅ Cloudflare-first architecture
-- ✅ Minimal external dependencies
-- ✅ All tests passing before PR
-
-See [.github/copilot-instructions.md](.github/copilot-instructions.md) for detailed development guidelines.
-
-## ⭐ Show Your Support
-
-If you find NebulaKit useful, please consider giving it a star on GitHub!
+**Note**: This project is built on top of NebulaKit. See [README-NEBULAKIT.md](./README-NEBULAKIT.md) for the original template documentation.

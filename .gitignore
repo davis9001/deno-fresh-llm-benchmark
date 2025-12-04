@@ -24,3 +24,6 @@ playwright/.cache/
 *.swp
 *.swo
 *~
+
+# Benchmark temp files
+benchmark-src/tmp/
